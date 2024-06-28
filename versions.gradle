@@ -30,6 +30,7 @@ configure(allprojects) {
       slf4jVersion = '2.0.7'
       springBootVersion = '3.1.1'
       swaggerVersion = '2.2.22'
+      testContainersVersion = '1.19.8'
   
       // Ledgerswarm libraries 
       lsProtobufVersion = '0.4.13'
@@ -37,11 +38,12 @@ configure(allprojects) {
       setlCommonsVersion = '1.15'
 
       // Participant modules
-      basicApproverVersion = '1.6.1'
-      basicConsensusVersion = '1.6'
+      basicApproverVersion = '1.7'
+      basicConsensusVersion = '1.7'
       basicDataVersion = '1.4'
       basicBridgeVersion = '1.6'
       basicLedgerVersion = '1.11'
+      basicRouterVersion = '1.6'
       basicSharedVersion = '1.6'
       ledgerPacs008Version = '1.2'
       ledgerTemenosVersion = '1.5'
