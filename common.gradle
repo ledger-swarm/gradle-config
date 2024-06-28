@@ -1,0 +1,212 @@
+// Specify the versions of our dependencies
+configure(allprojects) {
+  project ->
+    ext {
+      flywayVersion = '9.20.1'
+      hikariVersion = '5.0.1'
+      junitVersion = '5.9.3'
+      log4j2Version = '2.17.2'
+      lombokVersion = '1.18.28'
+      mockitoVersion = '4.5.1'
+      postgresVersion = '42.6.0'
+      setlCommonsVersion = '1.15'
+      slf4jVersion = '2.0.7'
+      springBootVersion = '3.1.1'
+      swaggerGradleVersion = '2.2.7'
+      swaggerVersion = '2.2.7'
+
+      basicSharedBridgeVersion = '1.5'
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Set group and version
+//
+////////////////////////////////////////////////////////////////////////////////
+
+// Use GIT to get the version number
+group 'io.ledgerswarm'
+pluginManager.withPlugin("com.palantir.git-version") {
+  if (
+      versionDetails().branchName ==~ /^(master)|(release.*)|(patch.*)$/
+          && versionDetails().isCleanTag
+          && gitVersion() ==~ /^\d+(\.\d+)+(-.+)?$/
+  ) {
+    project.version = gitVersion()
+  } else {
+    project.version = '100-SNAPSHOT'
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Where to load library code from
+//
+////////////////////////////////////////////////////////////////////////////////
+repositories {
+  // check central repository
+  mavenCentral()
+
+  // check ledger swarm specific repository
+  maven {
+    url = 'https://maven.pkg.github.com/ledger-swarm/maven-repo'
+    credentials {
+      username = "$githubUser"
+      password = "$githubToken"
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Configure testing
+//
+////////////////////////////////////////////////////////////////////////////////
+test {
+  useJUnitPlatform()
+  environment("RUN_DOCKER_TESTS", "true")
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Perform code quality analysis with checkstyle
+//
+////////////////////////////////////////////////////////////////////////////////
+pluginManager.withPlugin("checkstyle") {
+  checkstyle {
+    toolVersion = "10.13.0"
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+  }
+
+  // Do not perform checkstyle checks on test code
+  checkstyleTest {
+    enabled = false
+  }
+
+  // Guava conflict with checkstyle plugin.
+  configurations.checkstyle {
+    resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
+      select("com.google.guava:guava:0")
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Perform code quality analysis with spotbugs
+//
+////////////////////////////////////////////////////////////////////////////////
+pluginManager.withPlugin("com.github.spotbugs") {
+  spotbugs {
+    excludeFilter = rootProject.file('config/spotbugs/spotbugs-exclude.xml')
+  }
+
+  spotbugsMain {
+    reports {
+      html {
+        required = true
+      }
+      xml {
+        required = false
+      }
+    }
+  }
+
+// Do not perform spotbugs analysis on test code
+  spotbugsTest {
+    enabled = false
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Ensure the Javadoc and sources are packaged
+//
+////////////////////////////////////////////////////////////////////////////////
+java {
+  withJavadocJar()
+  withSourcesJar()
+}
+
+javadoc {
+  // Exclude generated code and test code from javadoc
+  source = sourceSets.main.allJava.filter { !(it.path.contains('/generated/') || it.path.contains('/src/test/')) }
+  options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Create a build properties file in the output jar
+//
+////////////////////////////////////////////////////////////////////////////////
+tasks.register('writeBuildProperties', WriteProperties) {
+  destinationFile = file("$buildDir/ls-build.properties")
+  property("project.name", project.name)
+  property("project.group", project.group)
+  property("project.version", project.version)
+  property("buildTime", java.time.Instant.now())
+}
+
+jar {
+  dependsOn writeBuildProperties
+  from("$buildDir/ls-build.properties") {
+    include "ls-build.properties"
+    into "META-INF"
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Publishing
+//
+////////////////////////////////////////////////////////////////////////////////
+pluginManager.withPlugin('maven-publish') {
+  // Configuration for publishing
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        artifactId = project.name
+
+        from components.java
+      }
+    }
+    repositories {
+      maven {
+        name = 'github'
+        url = 'https://maven.pkg.github.com/ledger-swarm/maven-repo'
+        credentials {
+          username = "$githubUser"
+          password = "$githubToken"
+        }
+      }
+    }
+  }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Swagger
+//
+////////////////////////////////////////////////////////////////////////////////
+pluginManager.withPlugin('io.swagger.core.v3.swagger-gradle-plugin') {
+  resolve {
+    outputFileName = project.name
+    outputFormat = 'JSON'
+    prettyPrint = 'TRUE'
+    classpath = sourceSets.main.runtimeClasspath
+    resourcePackages = [
+        'io.ledgerswarm'
+    ]
+    outputDir = new File("$project.buildDir/swagger")
+  }
+}
+
+pluginManager.withPlugin('io.setl.gradle.swagger') {
+  swaggerFix {
+    apiFile = "$project.buildDir/swagger/${project.name}.json"
+  }
+}
