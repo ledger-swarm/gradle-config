@@ -1,23 +1,3 @@
-// Specify the versions of our dependencies
-configure(allprojects) {
-  project ->
-    ext {
-      flywayVersion = '9.20.1'
-      hikariVersion = '5.0.1'
-      junitVersion = '5.9.3'
-      log4j2Version = '2.17.2'
-      lombokVersion = '1.18.28'
-      mockitoVersion = '4.5.1'
-      postgresVersion = '42.6.0'
-      setlCommonsVersion = '1.15'
-      slf4jVersion = '2.0.7'
-      springBootVersion = '3.1.1'
-      swaggerGradleVersion = '2.2.7'
-      swaggerVersion = '2.2.7'
-
-      basicSharedBridgeVersion = '1.5'
-    }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -91,7 +71,6 @@ pluginManager.withPlugin("checkstyle") {
     }
   }
 }
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // Perform code quality analysis with spotbugs
