@@ -125,6 +125,16 @@ tasks.register('writeBuildProperties', WriteProperties) {
   property("project.group", project.group)
   property("project.version", project.version)
   property("buildTime", java.time.Instant.now())
+
+  pluginManager.withPlugin("com.palantir.git-version") {
+    def gitDetails = versionDetails()
+    property("git.lastTag", gitDetails.lastTag)
+    property("git.commitDistance", gitDetails.commitDistance)
+    property("git.gitHash", gitDetails.gitHash)
+    property("git.gitHashFull", gitDetails.gitHashFull)
+    property("git.branchName", gitDetails.branchName)
+    property("git.isCleanTag", gitDetails.isCleanTag)
+  }
 }
 
 jar {
