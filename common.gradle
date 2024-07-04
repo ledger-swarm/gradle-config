@@ -25,6 +25,9 @@ pluginManager.withPlugin("com.palantir.git-version") {
 //
 ////////////////////////////////////////////////////////////////////////////////
 repositories {
+  // local repository
+  mavenLocal()
+
   // check central repository
   mavenCentral()
 
@@ -37,6 +40,17 @@ repositories {
     }
   }
 }
+
+
+pluginManager.withPlugin("idea") {
+  idea {
+    module {
+      downloadJavadoc = true
+      downloadSources = true
+    }
+  }
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
