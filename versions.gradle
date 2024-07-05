@@ -38,11 +38,11 @@ configure(allprojects) {
       setlCommonsVersion = '1.15'
 
       // Participant modules
-      basicApproverVersion = '1.7'
+      basicApproverVersion = '1.8'
       basicConsensusVersion = '1.7'
       basicDataVersion = '1.5'
       basicBridgeVersion = '1.7'
-      basicLedgerVersion = '1.11'
+      basicLedgerVersion = '1.12'
       basicRouterVersion = '1.6'
       basicSharedVersion = '1.7'
       ledgerPacs008Version = '1.3'
