@@ -44,7 +44,7 @@ configure(allprojects) {
       basicBridgeVersion = '1.7'
       basicLedgerVersion = '1.11'
       basicRouterVersion = '1.6'
-      basicSharedVersion = '1.6'
+      basicSharedVersion = '1.7'
       ledgerPacs008Version = '1.3'
       ledgerTemenosVersion = '1.6'
     }
