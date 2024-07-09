@@ -40,9 +40,9 @@ configure(allprojects) {
       // Participant modules
       basicApproverVersion = '1.8'
       basicConsensusVersion = '1.7'
-      basicDataVersion = '1.5'
+      basicDataVersion = '1.7'
       basicBridgeVersion = '1.7'
-      basicLedgerVersion = '1.12'
+      basicLedgerVersion = '1.13'
       basicRouterVersion = '1.6'
       basicSharedVersion = '1.7'
       ledgerPacs008Version = '1.3'
