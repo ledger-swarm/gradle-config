@@ -46,7 +46,7 @@ configure(allprojects) {
       basicNoopVersion = '1.0'
       basicRouterVersion = '1.7'
       basicSharedVersion = '1.8'
-      basicSharedWebVersion = '1.0'
+      basicSharedWebVersion = '1.1'
       ledgerPacs008Version = '1.4'
       ledgerTemenosVersion = '1.6'
     }
