@@ -49,5 +49,6 @@ configure(allprojects) {
       basicSharedWebVersion = '1.1'
       ledgerPacs008Version = '1.4.1'
       ledgerTemenosVersion = '1.6'
+      ledgerPismoVersion = '1.0'
     }
 }
