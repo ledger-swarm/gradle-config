@@ -41,7 +41,7 @@ configure(allprojects) {
       basicApproverVersion = '1.9'
       basicBridgeVersion = '1.10'
       basicConsensusVersion = '1.7'
-      basicDataVersion = '1.9'
+      basicDataVersion = '1.10'
       basicLedgerVersion = '1.15'
       basicNoopVersion = '1.0'
       basicRouterVersion = '1.8'
