@@ -41,7 +41,7 @@ configure(allprojects) {
       basicApproverVersion = '1.9'
       basicBridgeVersion = '1.10'
       basicConsensusVersion = '1.7'
-      basicDataVersion = '1.10'
+      basicDataVersion = '1.11'
       basicLedgerVersion = '1.16'
       basicNoopVersion = '1.0'
       basicRouterVersion = '1.9'
@@ -49,6 +49,6 @@ configure(allprojects) {
       basicSharedWebVersion = '1.1'
       ledgerPacs008Version = '1.4.1'
       ledgerTemenosVersion = '1.6'
-      ledgerPismoVersion = '1.2'
+      ledgerPismoVersion = '1.3'
     }
 }
