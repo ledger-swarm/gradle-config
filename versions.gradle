@@ -7,7 +7,7 @@ configure(allprojects) {
       bouncyCastleFipsVersion = '1.0.2.4'
       bouncyCastleVersion = '1.77'
       cassandraVersion = '4.17.0'
-      canonicalJsonVersion = '2.3'
+      canonicalJsonVersion = '3.0'
       flywayVersion = '9.20.1'
       hikariVersion = '5.0.1'
       javaxWsRsVersion = '2.0'
