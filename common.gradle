@@ -213,3 +213,42 @@ pluginManager.withPlugin('io.setl.gradle.swagger') {
     apiFile = "$project.buildDir/swagger/${project.name}.json"
   }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Load overrides
+//
+////////////////////////////////////////////////////////////////////////////////
+def loadOverrides(path,quiet) {
+  File f = file(path)
+  if (f.exists() && !f.isDirectory()) {
+    println "Loading overrides from \""+f.absolutePath+"\"";
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(f))
+    localProperties.each {
+      prop ->
+        {
+          println "Override: " + prop.key + " = " + prop.value
+          project.ext.set(prop.key, prop.value)
+        }
+    }
+  } else if(! quiet ) {
+    println "WARNING: Override file set to \"" + f.absolutePath + "\" but file does not exist.";
+  }
+
+}
+
+// Project file
+loadOverrides("$project.rootDir/override.properties", true);
+
+// Project property. This can be set on command-line or via the "ORG_GRADLE_PROJECT_overrideFile" environment variable.
+if (hasProperty("overrideFile")) {
+  loadOverrides(property("overrideFile"), false)
+}
+
+// Environment variable.
+if( System.getenv().containsKey("OVERRIDE_FILE") ) {
+  loadOverrides(System.getenv().get("OVERRIDE_FILE"), false);
+}
+
