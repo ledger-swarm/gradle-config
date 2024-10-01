@@ -1,0 +1,2 @@
+ORG_GRADLE_PROJECT_overrideFile=`pwd`/override.properties; export ORG_GRADLE_PROJECT_overrideFile
+
