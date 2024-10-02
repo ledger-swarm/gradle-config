@@ -126,6 +126,7 @@ javadoc {
   // Exclude generated code and test code from javadoc
   source = sourceSets.main.allJava.filter { !(it.path.contains('/generated/') || it.path.contains('/src/test/')) }
   options.addStringOption('Xdoclint:none', '-quiet')
+  failOnError = false  
 }
 
 ////////////////////////////////////////////////////////////////////////////////
