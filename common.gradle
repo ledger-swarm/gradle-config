@@ -25,8 +25,14 @@ pluginManager.withPlugin("com.palantir.git-version") {
 //
 ////////////////////////////////////////////////////////////////////////////////
 repositories {
-  // local repository
-  mavenLocal()
+  // Maven local only for our own snapshot builds
+  mavenLocal {
+    content {
+      snapshotsOnly()
+      includeGroupAndSubgroups('io.setl')
+      includeGroupAndSubgroups('io.ledgerswarm')
+    }
+  }
 
   // check central repository
   mavenCentral()
