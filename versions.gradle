@@ -35,7 +35,7 @@ configure(allprojects) {
   
       // Ledgerswarm libraries 
       lsProtobufVersion = '0.4.17'
-      messageUtilsVersion = '0.4.79'
+      messageUtilsVersion = '0.5.3'
       setlCommonsVersion = '1.16'
 
       // Participant modules
