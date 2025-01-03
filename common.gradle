@@ -259,3 +259,17 @@ if( System.getenv().containsKey("OVERRIDE_FILE") ) {
   loadOverrides(System.getenv().get("OVERRIDE_FILE"), false);
 }
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Ensure "-parameters" option is present on compile
+//
+////////////////////////////////////////////////////////////////////////////////
+compileJava {
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.compilerArgs << '-parameters'
+}
