@@ -20,7 +20,7 @@ configure(allprojects) {
       junitVersion = '5.9.3'
       kafkaClientVersion = '3.5.0'
       log4j2Version = '2.17.2'
-      lombokVersion = '1.18.28'
+      lombokVersion = '1.18.36'
       micrometerVersion = '1.12.1'
       micrometerPrometheusVersion = '1.12.0'
       mockitoVersion = '4.5.1'
