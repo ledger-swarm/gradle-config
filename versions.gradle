@@ -34,8 +34,8 @@ configure(allprojects) {
       testContainersVersion = '1.19.8'
   
       // Ledgerswarm libraries 
-      lsProtobufVersion = '0.4.17'
-      messageUtilsVersion = '0.5.7'
+      lsProtobufVersion = '0.5.1'
+      messageUtilsVersion = '0.5.8'
       setlCommonsVersion = '1.16'
 
       // Participant modules
