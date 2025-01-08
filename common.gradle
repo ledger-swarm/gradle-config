@@ -5,8 +5,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+group = 'io.ledgerswarm'
+
 // Use GIT to get the version number
-group 'io.ledgerswarm'
 pluginManager.withPlugin("com.palantir.git-version") {
   if (
       versionDetails().branchName ==~ /^(master)|(release.*)|(patch.*)$/

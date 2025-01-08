@@ -46,14 +46,16 @@ configure(allprojects) {
       basicDataVersion = '1.14'
       basicLedgerVersion = '1.17'
       basicNoopVersion = '1.1'
-      basicRouterVersion = '1.10'
+      basicRouterVersion = '1.11'
       basicSharedVersion = '1.12'
       basicSharedWebVersion = '1.1'
 
       ledgerPacs008Version = '1.5'
 
+      ledgerDrexVersion = '1.0'
+      ledgerOracleVersion = '1.4'
+      ledgerOracleTtfVersion = '1.3'
+      ledgerPismoVersion = '1.5'
       ledgerTemenosVersion = '1.7'
-      ledgerPismoVersion = '1.4'
-      ledgerOracleVersion = '1.3'
     }
 }
