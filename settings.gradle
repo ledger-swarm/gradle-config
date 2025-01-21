@@ -3,7 +3,7 @@ pluginManagement {
     gradlePluginPortal()
     mavenCentral()
     maven {
-      url 'https://maven.pkg.github.com/ledger-swarm/maven-repo'
+      url='https://maven.pkg.github.com/ledger-swarm/maven-repo'
       credentials {
         username = "$githubUser"
         password = "$githubToken"
